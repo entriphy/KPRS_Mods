@@ -1,2 +1,2 @@
 # KPRS_Mods
-MelonLoader mods for Klonoa Phantasy Reverie Series
+BepInEx mods for Klonoa Phantasy Reverie Series
