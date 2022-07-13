@@ -17,7 +17,7 @@ namespace DebugMenu
     }
 
     [HarmonyPatch(typeof(App.Klonoa2.DebugSetting), "Awake")]
-    public class SoundManager_PlayVoice
+    public class DebugSetting__Awake
     {
         [HarmonyPrefix]
         public static void Prefix()
