@@ -13,7 +13,6 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Unity" Version="6.0.0-*" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
-    <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
 	  <PackageReference Include="UnityEngine.Modules" Version="2020.3.25" IncludeAssets="compile" />
     <Reference Include="Assembly-CSharp">
       <HintPath>../Libraries/Assembly-CSharp.dll</HintPath>
