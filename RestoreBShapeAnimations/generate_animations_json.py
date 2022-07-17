@@ -10,8 +10,8 @@ if parse_version(kaitaistruct.__version__) < parse_version('0.9'):
     raise Exception("Incompatible Kaitai Struct Python API: 0.9 or later is required, but you have %s" % (kaitaistruct.__version__))
 
 # Copy game files into this directory or change the paths below
-headpack_bin_path: str = "RestoreMorphs/HEADPACK.BIN"
-kldata_bin_path: str = "RestoreMorphs/KLDATA.BIN"
+headpack_bin_path: str = "RestoreBShapeAnimations/HEADPACK.BIN"
+kldata_bin_path: str = "RestoreBShapeAnimations/KLDATA.BIN"
 
 class Headpack(KaitaiStruct):
     def __init__(self, _io, _parent=None, _root=None):
@@ -430,11 +430,7 @@ if __name__ == "__main__":
     headpack_buf = bytearray(open(headpack_bin_path, "rb").read())
     kldata_buf = bytearray(open(kldata_bin_path, "rb").read())
     headpack = Headpack.from_bytes(headpack_buf)
-    output = {
-        "CHR_AA": {},
-        "CHR_AD": {},
-        "CHR_KL": {},
-    }
+    output = { char_id.name: {} for char_id in CharacterIDs }
 
     for i, archive in enumerate(headpack.kldata.archives[:-2]):
         if i < 3 or i & 1 == 0:
@@ -448,12 +444,9 @@ if __name__ == "__main__":
             continue
         assets_offsets = read_offset_table(archive_bytes, root_offsets[0], True)
         models_offsets = read_offset_table(archive_bytes, assets_offsets[1], True)
-        if get_archive_size(models_offsets, CharacterIDs.CHR_AA.value) != 0:
-            read_model_animations(archive_bytes, models_offsets[CharacterIDs.CHR_AA.value], CharacterIDs.CHR_AA.name)
-        if get_archive_size(models_offsets, CharacterIDs.CHR_AD.value) != 0:
-            read_model_animations(archive_bytes, models_offsets[CharacterIDs.CHR_AD.value], CharacterIDs.CHR_AD.name)
-        if get_archive_size(models_offsets, CharacterIDs.CHR_KL.value) != 0:
-            read_model_animations(archive_bytes, models_offsets[CharacterIDs.CHR_KL.value], CharacterIDs.CHR_KL.name)
+        for char_id in CharacterIDs:
+            if get_archive_size(models_offsets, char_id.value) != 0:
+                read_model_animations(archive_bytes, models_offsets[char_id.value], char_id.name)
 
     with open("animations.json", "w") as f:
         f.write(json.dumps(output, indent=4))
