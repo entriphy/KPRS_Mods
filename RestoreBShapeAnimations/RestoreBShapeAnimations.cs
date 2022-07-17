@@ -55,9 +55,12 @@ namespace RestoreBShapeAnimations
             float actCnt = Game.GetActCnt(pObj, false);
             if (actCnt > 0.0f && actEndCnt > 0.0f)
                 num1 = actCnt / actEndCnt;
-            if (Animations.ContainsKey(pObj.chrInfo.id) && Animations[pObj.chrInfo.id].ContainsKey(actStateInfo.name))
+            string modelName = pObj.chrInfo.id;
+            if (modelName.StartsWith("CHR_KL"))
+                modelName = "CHR_KL"; // Fixes animations for DLC models
+            if (Animations.ContainsKey(modelName) && Animations[modelName].ContainsKey(actStateInfo.name))
             {
-                AnimationData[,] channels = Animations[pObj.chrInfo.id][actStateInfo.name];
+                AnimationData[,] channels = Animations[modelName][actStateInfo.name];
                 int index = (int)actCnt % (int)actEndCnt;
                 if (index >= channels.GetLength(1)) index = channels.GetLength(1) - 1; // Prevent out of range errors
 
