@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace RestoreBShapeAnimations
 {
-    [BepInPlugin("restore_bshape_animations", "Klonoa 2 - Restore Blend Shape Animations", "1.0.0")]
+    [BepInPlugin("restore_bshape_animations", "Klonoa 2 - Restore Blend Shape Animations", "1.1.0")]
     [BepInProcess("Klonoa.exe")]
     public class RestoreBShapeAnimationsPlugin : BaseUnityPlugin
     {
