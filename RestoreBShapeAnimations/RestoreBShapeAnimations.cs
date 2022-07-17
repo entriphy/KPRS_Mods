@@ -43,10 +43,6 @@ namespace RestoreBShapeAnimations
             __runOriginal = false;
             if (pObj.chrInfo == null || pObj.chrInfo.actStateInfos == null || pObj.actNum == 0) return;
             ActStateInfo actStateInfo = pObj.chrInfo.actStateInfos.Search(pObj.actNum);
-            foreach (var info in pObj.chrInfo.actStateInfos.infos)
-            {
-                info.stop = 1;
-            }
             if (actStateInfo == null) return;
             SyncMimeInfo[] syncMimeInfos = actStateInfo.syncMimeInfos;
             if (syncMimeInfos == null) return;
