@@ -382,7 +382,10 @@ class Klfa(KaitaiStruct):
 
 class CharacterIDs(Enum):
     CHR_AA = 0   # Lolo
+    CHR_AB = 1   # Tat
+    CHR_AC = 2   # Leorina
     CHR_AD = 3   # Popka
+    CHR_KK = 370 # King of Sorrow
     CHR_KL = 371 # Klonoa
 
 def read_u16le(buf, offset) -> int:
@@ -448,6 +451,6 @@ if __name__ == "__main__":
             if get_archive_size(models_offsets, char_id.value) != 0:
                 read_model_animations(archive_bytes, models_offsets[char_id.value], char_id.name)
 
-    with open("animations.json", "w") as f:
+    with open("RestoreBShapeAnimations/animations.json", "w") as f:
         f.write(json.dumps(output, indent=4))
     
