@@ -54,7 +54,7 @@ namespace RestoreBShapeAnimations
             string modelName = pObj.chrInfo.id;
             if (modelName.StartsWith("CHR_KL"))
                 modelName = "CHR_KL"; // Fixes animations for DLC models
-            if (Animations.ContainsKey(modelName) && Animations[modelName].ContainsKey(actStateInfo.name))
+            if (Animations.ContainsKey(modelName) && Animations[modelName].ContainsKey(actStateInfo.name) && syncMimeInfos.Length == 0)
             {
                 AnimationData[,] channels = Animations[modelName][actStateInfo.name];
                 int index = (int)actCnt % (int)actEndCnt;
