@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BepInEx;
 using HarmonyLib;
 using App.Klonoa2;
@@ -12,10 +12,15 @@ namespace DebugMenuLV
     public class DebugMenuPlugin : BaseUnityPlugin
     {
         private ConfigEntry<bool> configEnableLog;
+        private ConfigEntry<bool> configFixDLCMenu;
+
         private void Awake()
         {
             configEnableLog = Config.Bind<bool>("General", "EnableDebugLog", false, "Enables debug messages from the game. Logging.UnityLogListening must be enabled in the main BepInEx config.");
+            configFixDLCMenu = Config.Bind<bool>("General", "FixDLCMenu", false, "Fixes the DLC menu in the debug menu so that it properly enables/disables DLC costumes.");
             Log__Init.enableLog = configEnableLog.Value;
+            Game__DLCCheck.fixDLCMenu = configFixDLCMenu.Value;
+
             var harmony = new Harmony("debug_menu_lv");
             harmony.PatchAll();
             Logger.LogInfo("Plugin debug_menu_lv is loaded!");
@@ -43,6 +48,24 @@ namespace DebugMenuLV
             Debug.unityLogger.logEnabled = enableLog;
         }
     }
+
+    [HarmonyPatch(typeof(Game), "DLCCheck")]
+    public class Game__DLCCheck
+    {
+        public static bool fixDLCMenu = false;
+
+        [HarmonyPostfix]
+        public static void Prefix(ref bool __runOriginal)
+        {
+            // Only run if a value was changed in the DLC menu
+            if (fixDLCMenu && Array.Exists(Game.debugDLC, element => element))
+            {
+                __runOriginal = false;
+                for (int i = 0; i < Game.EnableDLC.Length; i++)
+                {
+                    Game.EnableDLC[i] = Game.debugDLC[i];
+                }
+            }
         }
     }
 }
