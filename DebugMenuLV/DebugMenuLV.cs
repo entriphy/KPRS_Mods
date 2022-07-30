@@ -68,4 +68,14 @@ namespace DebugMenuLV
             }
         }
     }
+
+    [HarmonyPatch(typeof(Game.HR_PREAD), "pt_log")]
+    public class Game__HR_PREAD__pt_log
+    {
+        [HarmonyPostfix]
+        public static void Prefix(Game.HR_CALL ca, string text)
+        {
+            Debug.Log("PT: " + text);
+        }
+    }
 }
