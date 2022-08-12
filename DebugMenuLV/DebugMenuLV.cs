@@ -17,7 +17,7 @@ namespace DebugMenuLV
         private void Awake()
         {
             configEnableLog = Config.Bind<bool>("General", "EnableDebugLog", false, "Enables debug messages from the game. Logging.UnityLogListening must be enabled in the main BepInEx config.");
-            configFixDLCMenu = Config.Bind<bool>("General", "FixDLCMenu", false, "Fixes the DLC menu in the debug menu so that it properly enables/disables DLC costumes.");
+            configFixDLCMenu = Config.Bind<bool>("General", "FixDLCMenu", true, "Fixes the DLC menu in the debug menu so that it properly enables/disables DLC costumes.");
             Log__Init.enableLog = configEnableLog.Value;
             Game__DLCCheck.fixDLCMenu = configFixDLCMenu.Value;
 
