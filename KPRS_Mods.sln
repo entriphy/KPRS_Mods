@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugMenu", "DebugMenu\DebugMenu.csproj", "{288F866D-6E89-4BD7-98F8-8FA67095081B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoreBShapeAnimations", "RestoreBShapeAnimations\RestoreBShapeAnimations.csproj", "{59AD626B-115B-435D-B6DF-E252684910D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolutionFix", "ResolutionFix\ResolutionFix.csproj", "{1F08CF94-F56E-4801-B7A9-720B2FDC621F}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -47,5 +49,17 @@ Global
 		{59AD626B-115B-435D-B6DF-E252684910D0}.Release|x64.Build.0 = Release|Any CPU
 		{59AD626B-115B-435D-B6DF-E252684910D0}.Release|x86.ActiveCfg = Release|Any CPU
 		{59AD626B-115B-435D-B6DF-E252684910D0}.Release|x86.Build.0 = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Debug|x86.Build.0 = Debug|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x64.Build.0 = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
