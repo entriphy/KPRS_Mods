@@ -7,7 +7,7 @@ using BepInEx.Configuration;
 
 namespace DebugMenuLV
 {
-    [BepInPlugin("debug_menu_lv", "Klonoa 2 Debug Menu", "1.1.0")]
+    [BepInPlugin("debug_menu", "Debug Menu", "1.1.0")]
     [BepInProcess("Klonoa.exe")]
     public class DebugMenuPlugin : BaseUnityPlugin
     {
@@ -21,9 +21,9 @@ namespace DebugMenuLV
             Log__Init.enableLog = configEnableLog.Value;
             Game__DLCCheck.fixDLCMenu = configFixDLCMenu.Value;
 
-            var harmony = new Harmony("debug_menu_lv");
+            var harmony = new Harmony("debug_menu");
             harmony.PatchAll();
-            Logger.LogInfo("Plugin debug_menu_lv is loaded!");
+            Logger.LogInfo("Plugin debug_menu is loaded!");
         }
     }
 

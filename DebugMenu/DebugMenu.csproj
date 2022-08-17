@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>DebugMenuLV</AssemblyName>
-    <Description>Enables debug menu in Klonoa 2: Lunatea's Veil when pressing the right stick</Description>
+    <AssemblyName>DebugMenu</AssemblyName>
+    <Description>Enables the hidden debug menu in Klonoa Phantasy Reverie Series (DtP and LV) when pressing the right stick.</Description>
     <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
