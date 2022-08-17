@@ -78,4 +78,27 @@ namespace DebugMenuLV
             Debug.Log("PT: " + text);
         }
     }
+
+    [HarmonyPatch(typeof(nsPFW.MainController), "Awake")]
+    public class nsPFW__MainController__Awake
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref nsPFW.MainController __instance)
+        {
+            Traverse objDebug = Traverse.Create(__instance).Field("objDebug");
+            GameObject obj = UnityEngine.Object.Instantiate<GameObject>(__instance.prefabDebug);
+            objDebug.SetValue(obj);
+        }
+    }
+
+    [HarmonyPatch(typeof(nsPFW.DebugMenuController), "Update")]
+    public class nsPFW__DebugMenuController__Update
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref nsPFW.DebugMenuController __instance)
+        {
+            Traverse traverse = Traverse.Create(__instance).Field("selectMenu");
+            Debug.Log(traverse.GetValue());
+        }
+    }
 }
