@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RestoreBShapeAnimations
 {
-    [BepInPlugin("restore_bshape_animations", "Restore Blend Shape Animations (LV)", "1.1.1")]
+    [BepInPlugin("restore_bshape_animations", "Restore Blend Shape Animations (LV)", "1.1.2")]
     [BepInProcess("Klonoa.exe")]
     public class RestoreBShapeAnimationsPlugin : BaseUnityPlugin
     {
