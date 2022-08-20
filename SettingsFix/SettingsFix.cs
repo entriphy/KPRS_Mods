@@ -1,19 +1,79 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using UnityEngine;
+using App.Klonoa2;
 
-namespace ResolutionFix
+namespace SettingsFix
 {
-    [BepInPlugin("resolution_fix", "Resolution Fix", "1.0.0")]
-    public class ResolutionFixPlugin : BaseUnityPlugin
+    [BepInPlugin("settings_fix", "settings_fix", "1.1.0")]
+    public class SettingsFixPlugin : BaseUnityPlugin
     {
         private void Awake()
         {
-            var harmony = new Harmony("resolution_fix");
+            var harmony = new Harmony("settings_fix");
             harmony.PatchAll();
-            Logger.LogInfo("Plugin resolution_fix is loaded!");
+            Logger.LogInfo("Plugin settings_fix is loaded!");
         }
     }
+
+    #region Anti-aliasing patches
+
+    [HarmonyPatch(typeof(StageManager), "SetAntiAliasing")]
+    public class StageManager__SetAntiAliasing
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Game.AntiAliasing antiAliasing)
+        {
+            switch (antiAliasing)
+            {
+                case Game.AntiAliasing.Disabled:
+                    QualitySettings.antiAliasing = 0;
+                    break;
+                case Game.AntiAliasing.Lv1:
+                    QualitySettings.antiAliasing = 2;
+                    break;
+                case Game.AntiAliasing.Lv2:
+                    QualitySettings.antiAliasing = 4;
+                    break;
+                case Game.AntiAliasing.Lv3:
+                    QualitySettings.antiAliasing = 8;
+                    break;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(nsPFW.Global), "Update")]
+    public class Global__Update
+    {
+        [HarmonyPrefix]
+        public static void Prefix(ref nsPFW.Global __instance)
+        {
+            bool isRequestCheckQuality = Traverse.Create(__instance).Field("isRequestCheckQuality").GetValue<bool>();
+            if (isRequestCheckQuality) {
+                nsPFW.CSaveDataLauncher.tSystemData system = nsPFW.Global.mainController.saveDataLauncher.m_pCurrentData.m_System;
+                switch (system.m_AntiAlias)
+                {
+                    case 0:
+                        QualitySettings.antiAliasing = 0;
+                        break;
+                    case 1:
+                        QualitySettings.antiAliasing = 2;
+                        break;
+                    case 2:
+                        QualitySettings.antiAliasing = 4;
+                        break;
+                    case 3:
+                        QualitySettings.antiAliasing = 8;
+                        break;
+                }
+            }
+            
+        }
+    }
+
+    #endregion
+
+    #region Resolution patches
 
     [HarmonyPatch(typeof(nsPFWLauncher.MainController), "IsEnableResolution")]
     public class nsPFWLauncher__MainController__IsEnableResolution
@@ -75,4 +135,6 @@ namespace ResolutionFix
             }
         }
     }
+
+    #endregion
 }

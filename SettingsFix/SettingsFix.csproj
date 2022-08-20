@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>ResolutionFix</AssemblyName>
-    <Description>Fixes resolution options for certain monitors</Description>
-    <Version>1.0.0</Version>
+    <AssemblyName>SettingsFix</AssemblyName>
+    <Description>Fixes certain settings</Description>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

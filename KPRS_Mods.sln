@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugMenu", "DebugMenu\Debu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoreBShapeAnimations", "RestoreBShapeAnimations\RestoreBShapeAnimations.csproj", "{59AD626B-115B-435D-B6DF-E252684910D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolutionFix", "ResolutionFix\ResolutionFix.csproj", "{1F08CF94-F56E-4801-B7A9-720B2FDC621F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingsFix", "SettingsFix\SettingsFix.csproj", "{1F08CF94-F56E-4801-B7A9-720B2FDC621F}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
