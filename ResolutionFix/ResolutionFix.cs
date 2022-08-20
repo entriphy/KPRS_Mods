@@ -9,9 +9,9 @@ namespace ResolutionFix
     {
         private void Awake()
         {
-            var harmony = new Harmony("debug_menu");
+            var harmony = new Harmony("resolution_fix");
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin resolution_fix is loaded!");
+            Logger.LogInfo("Plugin resolution_fix is loaded!");
         }
     }
 
