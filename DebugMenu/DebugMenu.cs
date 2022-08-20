@@ -5,7 +5,7 @@ using App.Klonoa2;
 using UnityEngine;
 using BepInEx.Configuration;
 
-namespace DebugMenuLV
+namespace DebugMenu
 {
     [BepInPlugin("debug_menu", "Debug Menu", "2.0.0")]
     [BepInProcess("Klonoa.exe")]
@@ -27,16 +27,7 @@ namespace DebugMenuLV
         }
     }
 
-    [HarmonyPatch(typeof(DebugSetting), "Awake")]
-    public class DebugSetting__Awake
-    {
-        [HarmonyPrefix]
-        public static void Prefix()
-        {
-            DebugSetting.instance.useDebugAction = true;
-        }
-    }
-
+    // Enables debug log output
     [HarmonyPatch(typeof(Log), "Init")]
     public class Log__Init
     {
@@ -49,13 +40,54 @@ namespace DebugMenuLV
         }
     }
 
+    #region DTP
+    // Enables debug menu in DTP
+    [HarmonyPatch(typeof(nsPFW.MainController), "Awake")]
+    public class nsPFW__MainController__Awake
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref nsPFW.MainController __instance)
+        {
+            Traverse objDebug = Traverse.Create(__instance).Field("objDebug");
+            GameObject obj = UnityEngine.Object.Instantiate<GameObject>(__instance.prefabDebug);
+            objDebug.SetValue(obj);
+        }
+    }
+
+    // Log menu option
+    // Remove this when GUI is working
+    [HarmonyPatch(typeof(nsPFW.DebugMenuController), "Update")]
+    public class nsPFW__DebugMenuController__Update
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref nsPFW.DebugMenuController __instance)
+        {
+            Traverse traverse = Traverse.Create(__instance).Field("selectMenu");
+            // Debug.Log(traverse.GetValue());
+        }
+    }
+    #endregion
+
+    #region LV
+    // Enables debug menu in LV
+    [HarmonyPatch(typeof(DebugSetting), "Awake")]
+    public class DebugSetting__Awake
+    {
+        [HarmonyPrefix]
+        public static void Prefix()
+        {
+            DebugSetting.instance.useDebugAction = true;
+        }
+    }
+
+    // Fixes DLC menu in LV
     [HarmonyPatch(typeof(Game), "DLCCheck")]
     public class Game__DLCCheck
     {
         public static bool fixDLCMenu = false;
 
         [HarmonyPostfix]
-        public static void Prefix(ref bool __runOriginal)
+        public static void Postfix(ref bool __runOriginal)
         {
             // Only run if a value was changed in the DLC menu
             if (fixDLCMenu && Array.Exists(Game.debugDLC, element => element))
@@ -69,6 +101,7 @@ namespace DebugMenuLV
         }
     }
 
+    // Log puppet/cutscene messages in LV
     [HarmonyPatch(typeof(Game.HR_PREAD), "pt_log")]
     public class Game__HR_PREAD__pt_log
     {
@@ -78,27 +111,5 @@ namespace DebugMenuLV
             Debug.Log("PT: " + text);
         }
     }
-
-    [HarmonyPatch(typeof(nsPFW.MainController), "Awake")]
-    public class nsPFW__MainController__Awake
-    {
-        [HarmonyPostfix]
-        public static void Postfix(ref nsPFW.MainController __instance)
-        {
-            Traverse objDebug = Traverse.Create(__instance).Field("objDebug");
-            GameObject obj = UnityEngine.Object.Instantiate<GameObject>(__instance.prefabDebug);
-            objDebug.SetValue(obj);
-        }
-    }
-
-    [HarmonyPatch(typeof(nsPFW.DebugMenuController), "Update")]
-    public class nsPFW__DebugMenuController__Update
-    {
-        [HarmonyPostfix]
-        public static void Postfix(ref nsPFW.DebugMenuController __instance)
-        {
-            Traverse traverse = Traverse.Create(__instance).Field("selectMenu");
-            Debug.Log(traverse.GetValue());
-        }
-    }
+    #endregion
 }

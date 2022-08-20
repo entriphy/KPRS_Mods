@@ -18,30 +18,7 @@ namespace SettingsFix
 
     #region Anti-aliasing patches
 
-    [HarmonyPatch(typeof(StageManager), "SetAntiAliasing")]
-    public class StageManager__SetAntiAliasing
-    {
-        [HarmonyPostfix]
-        public static void Postfix(Game.AntiAliasing antiAliasing)
-        {
-            switch (antiAliasing)
-            {
-                case Game.AntiAliasing.Disabled:
-                    QualitySettings.antiAliasing = 0;
-                    break;
-                case Game.AntiAliasing.Lv1:
-                    QualitySettings.antiAliasing = 2;
-                    break;
-                case Game.AntiAliasing.Lv2:
-                    QualitySettings.antiAliasing = 4;
-                    break;
-                case Game.AntiAliasing.Lv3:
-                    QualitySettings.antiAliasing = 8;
-                    break;
-            }
-        }
-    }
-
+    // DTP
     [HarmonyPatch(typeof(nsPFW.Global), "Update")]
     public class Global__Update
     {
@@ -67,14 +44,38 @@ namespace SettingsFix
                         break;
                 }
             }
-            
         }
     }
 
+    // LV
+    [HarmonyPatch(typeof(StageManager), "SetAntiAliasing")]
+    public class StageManager__SetAntiAliasing
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Game.AntiAliasing antiAliasing)
+        {
+            switch (antiAliasing)
+            {
+                case Game.AntiAliasing.Disabled:
+                    QualitySettings.antiAliasing = 0;
+                    break;
+                case Game.AntiAliasing.Lv1:
+                    QualitySettings.antiAliasing = 2;
+                    break;
+                case Game.AntiAliasing.Lv2:
+                    QualitySettings.antiAliasing = 4;
+                    break;
+                case Game.AntiAliasing.Lv3:
+                    QualitySettings.antiAliasing = 8;
+                    break;
+            }
+        }
+    }
     #endregion
 
     #region Resolution patches
 
+    // Launcher
     [HarmonyPatch(typeof(nsPFWLauncher.MainController), "IsEnableResolution")]
     public class nsPFWLauncher__MainController__IsEnableResolution
     {
@@ -96,6 +97,7 @@ namespace SettingsFix
         }
     }
 
+    // DTP
     [HarmonyPatch(typeof(nsPFW.Global), "IsEnableResolution")]
     public class nsPFW__Global__IsEnableResolution
     {
@@ -116,6 +118,7 @@ namespace SettingsFix
         }
     }
 
+    // LV
     [HarmonyPatch(typeof(App.Klonoa2.Game), "IsValidUnityScreenResolution")]
     public class Game__IsValidUnityScreenResolution
     {
