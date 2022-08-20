@@ -62,7 +62,9 @@ namespace RestoreBShapeAnimations
                 for (int i = 0; i < channels.GetLength(0); i++)
                 {
                     AnimationData data = channels[i, index];
-                    Game.MimeSet(pObj, data.Start, data.End, data.Weight);
+                    float weight = data.Weight;
+                    if (data.Start == data.End && weight == 0.0f) weight = 1.0f;
+                    Game.MimeSet(pObj, data.Start, data.End, weight);
                 }
             }
         }
