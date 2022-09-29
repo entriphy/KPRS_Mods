@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoreBShapeAnimations", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingsFix", "SettingsFix\SettingsFix.csproj", "{1F08CF94-F56E-4801-B7A9-720B2FDC621F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetLoader", "AssetLoader\AssetLoader.csproj", "{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +63,17 @@ Global
 		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x64.Build.0 = Release|Any CPU
 		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F08CF94-F56E-4801-B7A9-720B2FDC621F}.Release|x86.Build.0 = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|x64.Build.0 = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A9DBAB6-C1E9-43DF-88F2-06D3AE47FCE2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
