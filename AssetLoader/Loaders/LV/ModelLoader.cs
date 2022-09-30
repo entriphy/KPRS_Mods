@@ -1,13 +1,11 @@
-using System;
 using System.IO;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
 using App.Klonoa2;
 
-namespace AssetLoader.Loaders
+namespace AssetLoader.Loaders.LV
 {
-
     [HarmonyPatch(typeof(App.Klonoa2.Game.PSFXOBJ), "LinkUnity")]
     public class PSFXOBJ__LinkUnity
     {

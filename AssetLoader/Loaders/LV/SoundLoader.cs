@@ -7,7 +7,7 @@ using UnityEngine;
 using App.Klonoa2;
 
 
-namespace AssetLoader.Loaders
+namespace AssetLoader.Loaders.LV
 {
     [HarmonyPatch(typeof(App.Klonoa2.SoundManager), "AsyncLoadSound")]
     public class SoundManager__AsyncLoadSound
@@ -35,6 +35,4 @@ namespace AssetLoader.Loaders
         }
     }
 }
-
-
-
+ 
