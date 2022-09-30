@@ -6,10 +6,10 @@ using HarmonyLib;
 using UnityEngine;
 using App.Klonoa2;
 
-
 namespace AssetLoader.Loaders.LV
 {
-    [HarmonyPatch(typeof(App.Klonoa2.SoundManager), "AsyncLoadSound")]
+    // Log + load PPT and BGM files
+    [HarmonyPatch(typeof(SoundManager), "AsyncLoadSound")]
     public class SoundManager__AsyncLoadSound
     {
         [HarmonyPrefix]
@@ -32,6 +32,35 @@ namespace AssetLoader.Loaders.LV
                 __runOriginal = false;
                 __result = new List<object>().GetEnumerator(); // Prevents from returning null
             }
+        }
+    }
+
+    // Load SE files into pool
+    [HarmonyPatch(typeof(SoundManager), "SyncLoadSound")]
+    public class SoundManager__SyncLoadSound
+    {
+        [HarmonyPrefix]
+        public static void Prefix(string fileName, SoundManager.SOUND_TYPE type, int channel, ref Dictionary<string, AudioClip> ____poolSe, ref bool __runOriginal)
+        {
+            if (type != SoundManager.SOUND_TYPE.SE)
+                return;
+            string customPath = Path.Combine(AssetLoaderPlugin.LVDataPath, $"sound/{type}/{fileName}.wav").ToLower();
+            if (channel == SoundManager.AUTO_CHANNEL && File.Exists(customPath))
+            {
+                ____poolSe[fileName] = WavUtility.ToAudioClip(customPath);
+                __runOriginal = false;
+            }
+        }
+    }
+
+    // SE log
+    [HarmonyPatch(typeof(SoundManager), "PlaySE")]
+    public class SoundManager__PlaySE
+    {
+        [HarmonyPrefix]
+        public static void Prefix(string name)
+        {
+            Console.WriteLine($"SE {name}");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using HarmonyLib;
 using System.IO;
 
@@ -24,6 +24,7 @@ namespace AssetLoader
             Directory.CreateDirectory(Path.Combine(LVDataPath, "chr_infos"));
             Directory.CreateDirectory(Path.Combine(LVDataPath, "sound/bgm"));
             Directory.CreateDirectory(Path.Combine(LVDataPath, "sound/ppt"));
+            Directory.CreateDirectory(Path.Combine(LVDataPath, "sound/se"));
 
             var harmony = new Harmony("asset_loader");
             harmony.PatchAll();
