@@ -1,0 +1,44 @@
+name: Build plugins
+
+on: [push]
+
+jobs:
+  matrix:
+    name: Generate plugins matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix-json: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$(ls -d */ | grep -Ev '__pycache__|Libraries' | jq -R -s -c 'split("/\n")[:-1]')"
+  build:
+    name: Build plugin
+    runs-on: ubuntu-latest
+    needs: matrix
+    strategy:
+      matrix:
+        plugins: ${{ fromJson(needs.matrix.outputs.matrix-json) }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get commit hash
+        id: commit
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Setup .NET Core 6.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.x'
+      - name: Download Assembly-CSharp
+        run: wget -q -O Libraries/Assembly-CSharp.dll $ASSEMBLY_URL
+        env:
+          ASSEMBLY_URL: ${{secrets.ASSEMBLY_URL}}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build ${{ matrix.plugins }}
+        run: dotnet build --configuration Release --no-restore ${{ matrix.plugins }}
+      - name: Upload ${{ matrix.plugins }}
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: plugins-${{ steps.commit.outputs.sha_short }}
+          path: ${{ matrix.plugins }}/bin/Release/netstandard2.0/${{ matrix.plugins }}.dll
