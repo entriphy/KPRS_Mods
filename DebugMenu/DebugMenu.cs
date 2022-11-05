@@ -8,7 +8,7 @@ using BepInEx.Configuration;
 
 namespace DebugMenu
 {
-    [BepInPlugin("debug_menu", "Debug Menu", "2.0.0")]
+    [BepInPlugin("debug_menu", "Debug Menu", "2.1.0")]
     [BepInProcess("Klonoa.exe")]
     public class DebugMenuPlugin : BaseUnityPlugin
     {
