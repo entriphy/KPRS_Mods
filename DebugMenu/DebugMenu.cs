@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Reflection;
 using BepInEx;
 using HarmonyLib;
 using App.Klonoa2;
@@ -52,16 +53,39 @@ namespace DebugMenu
         }
     }
 
-    // Log menu option
-    // Remove this when GUI is working
-    [HarmonyPatch(typeof(nsPFW.DebugMenuController), "Update")]
-    public class nsPFW__DebugMenuController__Update
+    // Fixes DLC menu in DTP
+    [HarmonyPatch(typeof(nsPFW.Global), "DLCCheck")]
+    public class Global__DLCCheck
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref bool __runOriginal)
+        {
+            // Only run if a value was changed in the DLC menu
+            if (DebugMenuPlugin.configFixDLCMenu && Array.Exists(nsPFW.DebugMenuController.DebugDLC, element => element))
+            {
+                for (int i = 0; i < nsPFW.Global.EnableDLC.Length; i++)
+                {
+                    nsPFW.Global.EnableDLC[i] = nsPFW.DebugMenuController.DebugDLC[i];
+                }
+            }
+        }
+    }
+
+    // Properly use DebugDLC array instead of using EnableDLC for DLC menu
+    [HarmonyPatch(typeof(nsPFW.DebugMenuController), "OnEnable")]
+    public class nsPFW__DebugMenuController__OnEnable
     {
         [HarmonyPostfix]
         public static void Postfix(ref nsPFW.DebugMenuController __instance)
         {
-            Traverse traverse = Traverse.Create(__instance).Field("selectMenu");
-            // Debug.Log(traverse.GetValue());
+            if (!DebugMenuPlugin.configFixDLCMenu)
+                return;
+            bool[] isSelected = Traverse.Create(__instance).Field("isSelected").GetValue<bool[]>();
+            for (int i = 0; i < 7; i++)
+            {
+                isSelected[30 + i] = nsPFW.DebugMenuController.DebugDLC[i];
+            }
+            __instance.GetType().GetMethod("SetMenuItem", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(__instance, null);
         }
     }
     #endregion
