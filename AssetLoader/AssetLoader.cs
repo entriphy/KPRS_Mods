@@ -16,9 +16,12 @@ namespace AssetLoader
             // DTP
             DTPDataPath = Path.Combine(Paths.PluginPath, "AssetLoader", "dtp");
             Directory.CreateDirectory(Path.Combine(DTPDataPath, "beautify"));
-            Directory.CreateDirectory(Path.Combine(DTPDataPath, "sound/bgm"));
+            Directory.CreateDirectory(Path.Combine(DTPDataPath, "bs/action"));
+            Directory.CreateDirectory(Path.Combine(DTPDataPath, "bs/demo"));
+            Directory.CreateDirectory(Path.Combine(DTPDataPath, "bs/field"));
             Directory.CreateDirectory(Path.Combine(DTPDataPath, "sound/se"));
             Directory.CreateDirectory(Path.Combine(DTPDataPath, "sound/voice"));
+            Directory.CreateDirectory(Path.Combine(DTPDataPath, "sound/bgm"));
 
             // LV
             LVDataPath = Path.Combine(Paths.PluginPath, "AssetLoader", "lv");
