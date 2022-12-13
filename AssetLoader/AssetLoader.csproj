@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>AssetLoader</AssemblyName>
-    <Description>Easily mod game assets</Description>
-    <Version>1.1.0</Version>
+    <Description>Mod game assets in Klonoa Phantasy Reverie Series</Description>
+    <Version>1.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

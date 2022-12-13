@@ -4,7 +4,7 @@ using System.IO;
 
 namespace AssetLoader
 {
-    [BepInPlugin("asset_loader", "Asset Loader", "1.1.0")]
+    [BepInPlugin("asset_loader", "Asset Loader", "1.1.1")]
     [BepInProcess("Klonoa.exe")]
     public class AssetLoaderPlugin : BaseUnityPlugin
     {
